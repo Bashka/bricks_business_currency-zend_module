@@ -1,0 +1,34 @@
+{
+    "name": "bashka/bricks_business_currency-zend_module",
+    "description": "ZendFramework-модуль конвертера курсов валют",
+    "license": "GNU-3.0",
+	"keywords": [
+		"zf2",
+		"zf3",
+		"currency"
+	],
+    "authors": [
+        {
+            "name": "Artur Sh. Mamedbekov",
+            "email": "Artur-Mamedbekov@yandex.ru"
+        }
+    ],
+    "require": {
+      "php": ">=5.5.0",
+      "bashka/bricks_business_currency": "^1.0",
+	  "zendframework/zend-servicemanager": "^2.7 || ^3.1"
+    },
+	"require-dev": {
+		"phpunit/PHPUnit": "~4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Bricks\\Business\\Currency\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Bricks\\Business\\Currency\\UnitTest\\": "test/"
+		}
+	}
+}
