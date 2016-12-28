@@ -5,6 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Bricks\Business\Currency\Loader\ProxyCacheLoader;
+use Bricks\Business\Currency\ServiceManager\PluginManager\LoaderPluginManager;
 
 /**
  * @author Artur Sh. Mamedbekov
@@ -23,7 +24,7 @@ class ProxyCacheLoaderFactory implements FactoryInterface{
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null){
     $options = is_null($options)? [] : $options;
     $cache = $options['application_container']->get($options['cache']);
-    $loader = $container->get($options['loader']);
+    $loader = $container->get(LoaderPluginManager::class)->get($options['loader']);
     $key = isset($options['key'])? $container->get($options['key']) : null;
 
     return new ProxyCacheLoader($cache, $loader, $key);
@@ -35,7 +36,7 @@ class ProxyCacheLoaderFactory implements FactoryInterface{
    * {@inheritdoc}
    */
   public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null){
-    return $this($container, $requestedName?: ConverterInterface::class, $this->creationOptions);
+    return $this($container->getServiceLocator(), $requestedName?: ConverterInterface::class, $this->creationOptions);
   }
 
   /**

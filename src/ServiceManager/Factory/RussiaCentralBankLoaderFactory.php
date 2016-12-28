@@ -37,7 +37,7 @@ class RussiaCentralBankLoaderFactory implements FactoryInterface{
    * {@inheritdoc}
    */
   public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null){
-    return $this($container, $requestedName?: ConverterInterface::class, $this->creationOptions);
+    return $this($container->getServiceLocator(), $requestedName?: ConverterInterface::class, $this->creationOptions);
   }
 
   /**
