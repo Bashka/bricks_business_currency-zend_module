@@ -7,7 +7,7 @@ use Bricks\Business\Currency\Loader\RussiaCentralBankLoader;
  * @author Artur Sh. Mamedbekov
  */
 class RussiaCentralBankLoaderTest extends \PHPUnit_Framework_TestCase{
-  const FILE = __DIR__ . '/data/cbr.xml';
+  const FILE = 'http://www.cbr.ru/scripts/XML_daily.asp';
 
   public function testLoad(){
     $loader = new RussiaCentralBankLoader(self::FILE);

@@ -1,6 +1,8 @@
 <?php
 namespace Bricks\Business\Currency\Loader;
 
+use RuntimeException;
+
 /**
  * @author Artur Sh. Mamedbekov
  */
@@ -35,6 +37,24 @@ class RussiaCentralBankLoader implements LoaderInterface{
    * {@inheritdoc}
    */
   public function load(){
-    return file_get_contents($this->getUri());
+    $ch = curl_init($this->getUri());
+    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt($ch, CURLOPT_AUTOREFERER, true );
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120 );
+    curl_setopt($ch, CURLOPT_TIMEOUT, 120 );
+    curl_setopt($ch, CURLOPT_MAXREDIRS, 100 );
+    $content = curl_exec($ch);
+    if(curl_errno($ch)){
+      $exc = new RuntimeException(curl_error($ch));
+      curl_close($ch);
+      throw $exc;
+    }
+    else{
+      curl_close($ch);
+      return $content;
+    }
   }
 }
