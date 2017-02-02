@@ -7,7 +7,7 @@ use RuntimeException;
  * @author Artur Sh. Mamedbekov
  */
 class RussiaCentralBankLoader implements LoaderInterface{
-  const DEFAULT_URI = 'http://www.cbr.ru/scripts/XML_daily.asp';
+  const DEFAULT_URI = 'http://www.cbr-xml-daily.ru/daily.xml';
 
   /**
    * @var string Адрес источника.
